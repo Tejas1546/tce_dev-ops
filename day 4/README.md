@@ -1,52 +1,52 @@
-# 01/04/2025 - Docker & Environment Notes
+# 01/04/2025 - Docker & Environment Overview
 
 ---
 
-## Environment - Server (Run our Application)
+## Server Environments for Application Deployment
 
-- **Dev Environment** — Software developers test the minimal test cases.
-- **Test Env** — Software testing teams perform the functional/non-functional test cases, including performance and load testing.
-- **UAT Env** — User Acceptance Test. Before releasing the product to the market, a prototype is shown to the customer.
-- **Production Env** — Deploy the application so customers can access it.
+- **Development Environment (Dev)**: This is where developers test initial features and minimal test cases.
+- **Testing Environment (Test)**: Used by testing teams to carry out both functional and non-functional tests, including performance testing and load testing.
+- **User Acceptance Testing (UAT)**: Before the product is released, it's shown to the customer for feedback and approval.
+- **Production Environment**: This is the live environment where the application is accessible to end-users.
 
 ---
 
 ## What is a Container?
 
-- A container is a server where we actually run the application.
+- A container is essentially an isolated environment where we run our application. It bundles the application and its dependencies to run consistently across various computing environments.
 
 ---
 
-## Docker Concepts
+## Key Docker Concepts
 
 ### Dockerfile
 
-- A text document that contains a set of instructions for how to run the application in a container.
+- A **Dockerfile** is a script that contains a series of instructions on how to build a Docker image and configure the container.
 
 ### Docker Image
 
-- A template that contains everything needed to run the application:
+- A **Docker image** is a snapshot of a file system and contains everything required to run an application, including:
   - Source code
   - Dependencies
-  - Configuration files
-  - Library files
-  - Platform
-- **Build Once, Run Anywhere**
+  - Configurations
+  - Libraries
+  - Operating System layers
+- The principle of **Build Once, Run Anywhere** means you can run the same image across different systems.
 
 ### Docker Hub
 
-- A registry/library where we can store all Docker images.
+- **Docker Hub** is an online platform where Docker images are stored and shared.
 
 ---
 
-## Useful Docker Commands
+## Essential Docker Commands
 
 ```bash
 docker ps -a
-# Shows all containers irrespective of state.
+# List all containers, regardless of whether they're running or not.
 
 docker ps
-# Shows only running containers.
+# Only lists currently running containers.
 
 service docker start
 service docker status
@@ -64,22 +64,20 @@ docker run -it --name sample ubuntu /bin/bash
 
 docker run -td --name web-app -p 3002:3000 muralisocial123/cart-page-test:1.0
 
-# Exit container in detach mode:
+# To exit from a detached container:
 Ctrl + P + Q
 ```
-### Port Info (`-p` Flag)
+### Port Binding (`-p` flag)
 
-- Defines how to access the application from the browser.
-- Post port number:
-  - User choice (0-65534)
-  - Can be any number the user likes.
+- The `-p` flag binds a container port to a port on the host machine, making it accessible externally.
+  
+- The port number can be chosen by the user, within the range of 0 to 65534.
 
 ---
 
 ## Detached Mode
 
-- **Daemon Container**
-- Runs the container in the background.
+- When a container runs in **detached mode**, it operates in the background as a daemon and doesn't occupy the terminal session.
 
 ---
 
@@ -87,52 +85,63 @@ Ctrl + P + Q
 
 ### Build Commands
 
-- `FROM`: Define base image or parent image of the application.
-  - Every Dockerfile must start with this.
-- `COPY`: Copy a file or directory from local machine into Docker image.
-- `ADD`: Same as `COPY`, but also used for downloading packages from the internet into Docker image.
-- `RUN`: Install packages or dependencies in a container.
+- `FROM`: Specifies the base image for the Docker container. Every Dockerfile must begin with this instruction.
+  
+- `COPY`: Copies files or directories from the host machine into the container.
+  
+- `ADD`: Similar to `COPY`, but can also download files from the internet directly into the container.
+  
+- `RUN`: Executes commands inside the container, commonly used for installing packages or dependencies.
 
-### .dockerignore
+### `.dockerignore`
 
-- Used to ignore unnecessary files/packages while building Docker images.
-
----
-
-## Run Commands
-
-- `CMD`: Defines which code or artifact to run in a container.
-  - Allows runtime arguments.
-- `ENTRYPOINT`: Defines entry of the application.
-  - Does **not** allow runtime arguments.
-- `EXPOSE`: Defines on which port you want to access the application.
-- `ENV`: Defines environment variables of the application.
-- `WORKDIR`: Defines the working directory to keep the files inside the container.
-- `USER`: To create a user account.
+- The `.dockerignore` file is used to exclude files or directories from being copied into the Docker image during the build process.
 
 ---
 
-## Role
+## Dockerfile Execution Commands
 
-- Collect Environment Variables
-- Port Number
-- DB Endpoints
-
----
-
-## Writing Dockerfile - 7 Steps
-
-1. Identify the base image of the application.
-2. Create a work directory.
-3. Copy the dependencies into Docker image.
-4. Install the dependencies.
-5. Copy whole source code from local machine to Docker image.
-6. Define the expose port number.
-7. Mention the command to run the application in the container.
+- `CMD`: Specifies the command to run when the container starts. It can include runtime arguments.
+  
+- `ENTRYPOINT`: Defines the main command for the container but does not allow runtime arguments.
+  
+- `EXPOSE`: Exposes a port for access to the container's service.
+  
+- `ENV`: Sets environment variables within the container.
+  
+- `WORKDIR`: Defines the working directory inside the container.
+  
+- `USER`: Specifies the user account for running the container.
 
 ---
 
-## Docker Build & Push Example
+## Purpose of the Dockerfile
+
+- Collect necessary environment variables.
+  
+- Define the port number and database connection details for the container.
+
+---
+
+## Steps to Write a Dockerfile
+
+1. Choose the base image for the application.
+  
+2. Set the working directory inside the container.
+  
+3. Copy necessary dependencies into the container.
+  
+4. Install the required packages.
+  
+5. Copy the source code from the host machine into the container.
+  
+6. Specify the port to expose for external access.
+  
+7. Set the command to run the application within the container.
+
+---
+
+## Example: Build & Push a Docker Image
 
 ```bash
 git clone -b master https://github.com/Tejas1546/gitses.git
@@ -147,4 +156,3 @@ docker exec -it node-app /bin/bash
 
 docker login
 docker push tejas/web-app-nodejs:1.0
-```
