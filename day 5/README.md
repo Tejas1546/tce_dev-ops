@@ -106,7 +106,7 @@ kubectl get nodes
 ## 🚀 Deploying Apps on Kubernetes
 ### 1️⃣ Deploy a Pod from Manifest
 ```bash
-git clone https://github.com/Vaishakharekere/vaishakh-k8s-manifests.git
+git clone https://github.com/Tejas1546/gitses.git
 cd vaishakh-k8s-manifests
 
 kubectl apply -f pod.yaml
@@ -115,7 +115,7 @@ kubectl describe pod sample-pod
 ```
 ### 2️⃣ Deploy a Sample Retail Application
 ```bash
-git clone -b master https://github.com/Vaishakharekere/Retail-App_kubernetes.git
+git clone -b master https://github.com/Tejas1546/gitses.git
 cd Retail-App_kubernetes
 
 kubectl apply -f userprofile-deployment.yml
