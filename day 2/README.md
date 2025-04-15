@@ -60,28 +60,39 @@ DevOps – Day 2: AWS EC2 Setup & Linux Basics
 
 Use your terminal and run:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   pgsqlCopyEditchmod 400 path/to/day2-key.pem    ssh -i path/to/day2-key.pem ec2-user@   `
-
-> Replace path/to/day2-key.pem with the actual path to your key fileReplace with the public IP of your EC2 instance
+```bash
+chmod 400 path/to/day2-key.pem  
+ssh -i path/to/day2-key.pem ec2-user@<your-ec2-public-ip>
+```
+> Replace path/to/day2-key.pem with the actual path to your key file
+> Replace with the public IP of your EC2 instance
 
 🔄 Updating Packages on Amazon Linux
 ------------------------------------
 
 ### For Amazon Linux 2:
+```bash
+sudo yum update -y
+```
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   sqlCopyEditsudo yum update -y   `
 
 ### For Amazon Linux 2023:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   sqlCopyEditsudo dnf update -y   `
+```bash
+sudo dnf update -y
+```
 
-💻 Basic Linux Commands
------------------------
+## 💻 Basic Linux Commands
 
-CommandPurposelsLists files and directoriespwdDisplays the current directory pathcd
-
-Changes to the specified directorytouch Creates an empty filemkdir
-
-Creates a new directoryrm Deletes a filermdir
-
-Removes an empty directorysudoExecutes a command with superuser privilegesclearClears the terminal screenexitExits the SSH session
+| Command         | Purpose                                      |
+|------------------|----------------------------------------------|
+| `ls`             | Lists files and directories                  |
+| `pwd`            | Displays the current directory path          |
+| `cd <dir>`       | Changes to the specified directory           |
+| `touch <file>`   | Creates an empty file                        |
+| `mkdir <dir>`    | Creates a new directory                      |
+| `rm <file>`      | Deletes a file                               |
+| `rmdir <dir>`    | Removes an empty directory                   |
+| `sudo`           | Executes a command with superuser privileges |
+| `clear`          | Clears the terminal screen                   |
+| `exit`           | Exits the SSH session                        |
